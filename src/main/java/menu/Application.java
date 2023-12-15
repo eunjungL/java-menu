@@ -1,12 +1,16 @@
 package menu;
 
 import menu.controller.MenuController;
+import menu.service.CoachService;
 import menu.view.InputView;
+import menu.view.OutputView;
 
 public class Application {
     public static void main(String[] args) {
         InputView inputView = new InputView();
-        MenuController menuController = new MenuController(inputView);
+        OutputView outputView = new OutputView();
+        CoachService coachService = new CoachService();
+        MenuController menuController = new MenuController(inputView, outputView, coachService);
 
         menuController.run();
     }

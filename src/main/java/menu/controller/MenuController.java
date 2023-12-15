@@ -2,17 +2,23 @@ package menu.controller;
 
 import menu.Constants;
 import menu.domain.Coach;
+import menu.domain.Recommendation;
+import menu.service.CoachService;
 import menu.view.InputView;
+import menu.view.OutputView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class MenuController {
     private final InputView inputView;
+    private final OutputView outputView;
+    private final CoachService coachService;
 
-    public MenuController(InputView inputView) {
+    public MenuController(InputView inputView, OutputView outputView, CoachService coachService) {
         this.inputView = inputView;
+        this.outputView = outputView;
+        this.coachService = coachService;
     }
 
     public void run() {
@@ -20,6 +26,8 @@ public class MenuController {
 
         List<String> coachNames = getCoachNames();
         List<Coach> coaches = makeCoaches(coachNames);
+
+        getRecommendations(coaches);
     }
 
     private List<String> getCoachNames() {
@@ -51,5 +59,11 @@ public class MenuController {
                 System.out.println(exception.getMessage());
             }
         }
+    }
+
+    private void getRecommendations(List<Coach> coaches) {
+        Recommendation recommendations = coachService.getRecommendations(coaches);
+
+        outputView.printRecommendations(recommendations.toString());
     }
 }
