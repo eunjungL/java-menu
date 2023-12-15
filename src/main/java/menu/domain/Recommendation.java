@@ -21,7 +21,7 @@ public class Recommendation {
     }
 
     private void validateCategoryDuplicate(Category category) {
-        if (Collections.frequency(categories, category) > Constants.MAX_DUPLICATE_CATEGORY) {
+        if (Collections.frequency(categories, category) + 1> Constants.MAX_DUPLICATE_CATEGORY) {
             throw new IllegalArgumentException();
         }
     }
