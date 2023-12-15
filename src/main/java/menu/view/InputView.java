@@ -28,4 +28,12 @@ public class InputView {
             );
         }
     }
+
+    public List<String> getNoEatFood(String name) {
+        System.out.printf(Constants.GET_NO_EAT_FOOD_BY_COACH, name);
+        System.out.println();
+
+        String input = Console.readLine();
+        return List.of(input.split(","));
+    }
 }

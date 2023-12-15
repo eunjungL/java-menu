@@ -5,6 +5,7 @@ import menu.domain.Coach;
 import menu.view.InputView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class MenuController {
@@ -17,27 +18,38 @@ public class MenuController {
     public void run() {
         System.out.println(Constants.START_COMMENT);
 
-        List<Coach> coaches = getCoaches();
+        List<String> coachNames = getCoachNames();
+        List<Coach> coaches = makeCoaches(coachNames);
     }
 
-    private List<Coach> getCoaches() {
+    private List<String> getCoachNames() {
         while (true) {
             try {
-                List<String> coachNames = inputView.getCoachNames();
-                return makeCoachesByName(coachNames);
+                return inputView.getCoachNames();
             } catch (IllegalArgumentException exception) {
                 System.out.println(exception.getMessage());
             }
         }
     }
 
-    private List<Coach> makeCoachesByName(List<String> coachNames) {
+    private List<Coach> makeCoaches(List<String> coachNames) {
         List<Coach> coaches = new ArrayList<>();
 
         for (String name : coachNames) {
-            coaches.add(new Coach(name));
+            coaches.add(makeCoach(name));
         }
 
         return coaches;
+    }
+
+    private Coach makeCoach(String name) {
+        while (true) {
+            try {
+                List<String> noEatFood = inputView.getNoEatFood(name);
+                return new Coach(name, noEatFood);
+            } catch (IllegalArgumentException exception) {
+                System.out.println(exception.getMessage());
+            }
+        }
     }
 }

@@ -11,4 +11,7 @@ public class ErrorMessage {
                     Constants.MIN_COACH_NAME_LEN,
                     Constants.MAX_COACH_NAME_LEN
             );
+    public final static String NO_EAT_FOOD_COUNT_ERROR = ERROR_PREFIX + String.format(
+            "먹지 못하는 음식의 개수는 %d개 이하여야 합니다.", Constants.MAX_NO_EAT_FOOD_COUNT
+    );
 }
